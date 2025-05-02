@@ -1,0 +1,7 @@
+check-common:
+  audit-enabled: true
+  log-execution-time: true
+  retry:
+    enabled: true
+    default-max-attempts: 3
+    default-delay-ms: 500
