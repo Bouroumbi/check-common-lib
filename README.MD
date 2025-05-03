@@ -41,4 +41,4 @@ Ajoutez la dépendance Maven :
 
 ## Sonatype verification
 
-[ sonatype-nexus-verification: jfnepce5jy ]
+[sonatype-nexus-staging:jfnepce5jy]
