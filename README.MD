@@ -38,3 +38,7 @@ Ajoutez la dépendance Maven :
     <version>1.0.0</version>
 </dependency>
 ```
+
+## Sonatype verification
+
+[sonatype-nexus-verification: jfnepce5jy]
