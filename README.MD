@@ -33,7 +33,7 @@ Ajoutez la dépendance Maven :
 
 ```xml
 <dependency>
-    <groupId>com.tonorganisation</groupId>
+    <groupId>io.github.bouroumbi</groupId>
     <artifactId>check-common-lib</artifactId>
     <version>1.0.0</version>
 </dependency>
