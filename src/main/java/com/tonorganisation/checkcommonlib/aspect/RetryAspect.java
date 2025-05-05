@@ -7,16 +7,70 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
+/**
+ * Aspect qui intercepte les méthodes annotées avec {@link RetryOnFailure}
+ * et applique une logique de re-tentative en cas d'échec.
+ *
+ * <p>
+ * Le comportement est configurable via l'annotation ou, par défaut,
+ * via les propriétés {@link RetryProperties}.
+ *
+ * <p>
+ * Cette approche permet de rendre les méthodes plus résilientes en cas d’échecs
+ * transitoires
+ * (ex : appels réseau, base de données temporairement indisponible).
+ *
+ * <p>
+ * Exemple d'utilisation :
+ * 
+ * <pre>
+ * {@code
+ * @RetryOnFailure(maxAttempts = 5, delayMs = 1000, include = { IOException.class })
+ * public void appelerService() {
+ *     // logique instable
+ * }
+ * }
+ * </pre>
+ *
+ * <p>
+ * Lorsqu’une exception est levée, l’aspect vérifie si elle est incluse ou
+ * exclue,
+ * puis attend un délai entre chaque tentative avant de réessayer.
+ *
+ * @see RetryOnFailure
+ * @see RetryProperties
+ */
 @Aspect
 @Slf4j
 public class RetryAspect {
 
+    /**
+     * Propriétés globales de configuration du comportement de re-tentative.
+     */
     private final RetryProperties retryProperties;
 
+    /**
+     * Constructeur avec injection des propriétés.
+     *
+     * @param retryProperties propriétés contenant les valeurs par défaut de
+     *                        re-tentative
+     */
     public RetryAspect(RetryProperties retryProperties) {
         this.retryProperties = retryProperties;
     }
 
+    /**
+     * Intercepte les méthodes annotées avec {@link RetryOnFailure} et exécute la
+     * logique de re-tentative.
+     *
+     * @param joinPoint       le point de jonction représentant la méthode
+     *                        interceptée
+     * @param retryAnnotation l'annotation {@link RetryOnFailure} présente sur la
+     *                        méthode
+     * @return le résultat de la méthode si elle réussit
+     * @throws Throwable l'exception finale si toutes les tentatives échouent ou si
+     *                   l'exception est exclue
+     */
     @Around("@annotation(retryAnnotation)")
     public Object retry(ProceedingJoinPoint joinPoint, RetryOnFailure retryAnnotation) throws Throwable {
         int maxAttempts = retryAnnotation.maxAttempts() > 0
@@ -57,6 +111,15 @@ public class RetryAspect {
         throw lastException;
     }
 
+    /**
+     * Détermine si l’exception levée mérite une re-tentative selon les types inclus
+     * et exclus.
+     *
+     * @param ex      l’exception levée
+     * @param include types d'exceptions à inclure pour le retry
+     * @param exclude types d'exceptions à exclure du retry
+     * @return {@code true} si la méthode doit être retentée, {@code false} sinon
+     */
     private boolean shouldRetryForException(Throwable ex, Class<? extends Throwable>[] include,
             Class<? extends Throwable>[] exclude) {
         for (Class<? extends Throwable> exType : exclude) {
