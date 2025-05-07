@@ -15,12 +15,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * <p>
  * Exemple de configuration :
+ * </p>
  * 
  * <pre>
  * check-common:
  *   log-execution-time: true
  * </pre>
- * </p>
+ * 
  *
  * @see com.tonorganisation.checkcommonlib.aspect.ExecutionTimeAspect
  */

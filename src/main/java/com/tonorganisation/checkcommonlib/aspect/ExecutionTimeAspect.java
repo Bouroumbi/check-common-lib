@@ -16,20 +16,21 @@ import org.springframework.stereotype.Component;
  * Cet aspect est activé uniquement si la propriété
  * {@code check-common.log-execution-time=true}
  * est présente dans la configuration Spring.
- *
+ * </p>
  * <p>
  * Il entoure chaque appel de méthode interceptée pour mesurer le temps entre
  * l'entrée et la sortie,
  * et loggue le résultat via SLF4J.
- *
+ * </p>
  * <p>
  * Exemple de log :
  * {@code [EXECUTION TIME] MyService.doWork(..) exécutée en 105 ms}
- *
+ * </p>
  * <p>
  * Ce mécanisme permet d’identifier rapidement les points de lenteur dans
  * l'application.
- *
+ * </p>
+ * 
  * @author Bouroumbi
  */
 @Slf4j

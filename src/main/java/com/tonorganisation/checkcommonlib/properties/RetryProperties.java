@@ -16,6 +16,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * <p>
  * Exemple de configuration :
+ * </p>
  * 
  * <pre>
  * check-common:
@@ -24,7 +25,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *     default-max-attempts: 5
  *     default-delay-ms: 1000
  * </pre>
- * </p>
+ * 
  *
  * @see com.tonorganisation.checkcommonlib.aspect.RetryAspect
  */

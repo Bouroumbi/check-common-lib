@@ -8,6 +8,7 @@ import java.lang.annotation.*;
  * 
  * <p>
  * Elle permet de spécifier :
+ * </p>
  * <ul>
  * <li>le nombre maximal de tentatives ({@link #maxAttempts()})</li>
  * <li>le délai entre chaque tentative en millisecondes
@@ -21,9 +22,11 @@ import java.lang.annotation.*;
  * Cette annotation est généralement utilisée avec de l'AOP (Aspect Oriented
  * Programming) pour intercepter
  * les méthodes annotées et gérer le mécanisme de retry dynamiquement.
+ * </p>
  * 
  * <p>
  * Exemple d'utilisation :
+ * </p>
  * 
  * <pre>
  * {@code

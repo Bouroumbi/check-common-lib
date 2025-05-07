@@ -13,12 +13,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * <p>
  * Exemple de configuration :
+ * </p>
  * 
  * <pre>
  * check-common:
  *   audit-enabled: true
  * </pre>
- * </p>
+ * 
  *
  * @see com.tonorganisation.checkcommonlib.aspect.AuditAspect
  */

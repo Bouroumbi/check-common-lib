@@ -20,9 +20,10 @@ import java.util.Arrays;
  * Cet aspect se déclenche uniquement lorsque la propriété
  * {@code check-common.audit-enabled=true}
  * est définie dans la configuration Spring.
- *
+ * </p>
  * <p>
  * Les événements suivants sont interceptés :
+ * </p>
  * <ul>
  * <li>Entrée dans une méthode avec les paramètres</li>
  * <li>Sortie de la méthode avec le résultat retourné</li>
@@ -32,7 +33,8 @@ import java.util.Arrays;
  * <p>
  * L’objectif est de faciliter le suivi du comportement de l’application sans
  * modifier le code métier.
- *
+ * </p>
+ * 
  * @author Bouroumbi
  */
 @Slf4j

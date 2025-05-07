@@ -14,14 +14,15 @@ import org.aspectj.lang.annotation.Aspect;
  * <p>
  * Le comportement est configurable via l'annotation ou, par défaut,
  * via les propriétés {@link RetryProperties}.
- *
+ * </p>
  * <p>
  * Cette approche permet de rendre les méthodes plus résilientes en cas d’échecs
  * transitoires
  * (ex : appels réseau, base de données temporairement indisponible).
- *
+ * </p>
  * <p>
  * Exemple d'utilisation :
+ * </p>
  * 
  * <pre>
  * {@code
@@ -36,7 +37,8 @@ import org.aspectj.lang.annotation.Aspect;
  * Lorsqu’une exception est levée, l’aspect vérifie si elle est incluse ou
  * exclue,
  * puis attend un délai entre chaque tentative avant de réessayer.
- *
+ * </p>
+ * 
  * @see RetryOnFailure
  * @see RetryProperties
  */

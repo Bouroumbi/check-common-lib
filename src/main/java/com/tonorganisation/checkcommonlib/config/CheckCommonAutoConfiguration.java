@@ -23,16 +23,18 @@ import org.springframework.context.annotation.Configuration;
  *
  * <p>
  * Les aspects suivants sont supportés :
+ * </p>
  * <ul>
  * <li>{@link AuditAspect} - journalisation des entrées/sorties/exceptions</li>
  * <li>{@link ExecutionTimeAspect} - mesure du temps d'exécution des
  * méthodes</li>
  * <li>{@link RetryAspect} - re-tentatives automatiques en cas d'échec</li>
  * </ul>
- * </p>
+ * 
  *
  * <p>
  * Ces fonctionnalités sont activables ou désactivables via des propriétés :
+ * </p>
  * 
  * <pre>
  * check-common:
@@ -41,7 +43,7 @@ import org.springframework.context.annotation.Configuration;
  *   retry:
  *     enabled: true
  * </pre>
- * </p>
+ * 
  *
  * <p>
  * Grâce à l'annotation {@link EnableConfigurationProperties}, les propriétés
