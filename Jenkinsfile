@@ -2,15 +2,8 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3.9'   // Configure-le dans "Global Tool Configuration"
-        jdk 'JDK 21'        
-    }
-
-    environment {
-        GPG_KEY_ID = credentials('gpg-key-id')
-        GPG_SECRET = credentials('gpg-secret')
-        OSSRH_USERNAME = credentials('ossrh-username')
-        OSSRH_PASSWORD = credentials('ossrh-password')
+        maven 'Maven 3.9'      // Doit exister dans "Global Tool Configuration"
+        jdk 'JDK 21'           // Idem
     }
 
     stages {
@@ -20,15 +13,21 @@ pipeline {
             }
         }
 
-        stage('Sign') {
+        stage('Deploy to OSSRH') {
             steps {
-                sh 'mvn verify -Psign-artifacts'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                sh 'mvn clean deploy -Psign-artifacts'
+                configFileProvider([configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS')]) {
+                    withCredentials([
+                        usernamePassword(credentialsId: 'ossrh', usernameVariable: 'OSSRH_USERNAME', passwordVariable: 'OSSRH_PASSWORD'),
+                        string(credentialsId: 'gpg-passphrase', variable: 'GPG_PASSPHRASE')
+                    ]) {
+                        sh '''
+                            mvn clean deploy \
+                              --settings $MAVEN_SETTINGS \
+                              -Psign-artifacts,gpg \
+                              -Dgpg.passphrase=$GPG_PASSPHRASE
+                        '''
+                    }
+                }
             }
         }
     }
